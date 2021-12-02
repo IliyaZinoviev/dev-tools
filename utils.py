@@ -21,7 +21,7 @@ def convert2snake(some_str: str):
 def convert2camel(snake_str: str):
     seps: list[str] = ['_', '-']
     others = multiple_split(snake_str, *seps)
-    return ''.join(*map(str.title, others))
+    return ''.join(map(str.title, others))
 
 
 def multiple_split(some_str: str, *seps) -> list[str]:
