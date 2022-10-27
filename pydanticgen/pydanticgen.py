@@ -1,3 +1,4 @@
+import json
 from datetime import date, datetime
 from decimal import Decimal
 from typing import Union
@@ -12,7 +13,8 @@ class PydanticModelsGenerator:
     inflect_engine: inflect.engine = inflect.engine()
 
     def __init__(self, input_data: dict = None, root_model_name: str = None, output_path_dir: str = None):
-        call_multiple_assert(('input_data', input_data), ('root_model_name', root_model_name),
+        call_multiple_assert(('input_data', input_data),
+                             ('root_model_name', root_model_name),
                              ('output_path_dir', output_path_dir))
         self.models: dict[str, list[str]] = {}
         self.input_data: dict = input_data
@@ -90,7 +92,9 @@ class PydanticModelsGenerator:
 
 
 if __name__ == '__main__':
-    input_data = {}
-    root_model_name = 'ClassName'
-    output_path_dir = ''
+    input_data_path = '/home/ilusha/PycharmProjects/invest_agent/schema.json'
+    with open(input_data_path, 'r') as f:
+        input_data = json.load(f)
+    root_model_name = 'OperationsResp'
+    output_path_dir = '/home/ilusha/PycharmProjects/invest_agent/pydanticgen'
     PydanticModelsGenerator(input_data, root_model_name, output_path_dir).exec()
